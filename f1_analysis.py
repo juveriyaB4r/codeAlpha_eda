@@ -12,7 +12,7 @@ print(df.head())
 
 # --- Now the 8-step analysis ---
 
-# 1️⃣ Basic Info About Your Data
+# Basic Info About Your Data
 print("\nShape (Rows, Columns):", df.shape)
 print("\nColumns:\n", df.columns.tolist())
 print("\nInfo:")
@@ -22,13 +22,13 @@ print(df.describe(include='all'))
 print("\nFirst 5 rows:")
 print(df.head())
 
-# 2️⃣ Visualize Missing Values
+#  Visualize Missing Values
 plt.figure(figsize=(15, 6))
 sns.heatmap(df.isnull(), cbar=False, cmap="viridis")
 plt.title("Missing Values Heatmap")
 plt.show()
 
-# 3️⃣ Driver Positions Across Races
+#  Driver Positions Across Races
 position_cols = [col for col in df.columns if col.endswith('_pos')]
 
 df_melted = df.melt(id_vars='Driver', value_vars=position_cols,
@@ -47,7 +47,7 @@ plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.tight_layout()
 plt.show()
 
-# 4️⃣ Average Position Per Driver
+#  Average Position Per Driver
 avg_positions = df[position_cols].mean(axis=1)
 
 plt.figure(figsize=(12, 6))
@@ -57,7 +57,7 @@ plt.xlabel('Average Position')
 plt.ylabel('Driver')
 plt.show()
 
-# 5️⃣ Correlation Between Race Finishes and Points
+#  Correlation Between Race Finishes and Points
 df_pos_only = df[position_cols].copy()
 df_pos_only['Points'] = df['Points']
 
@@ -69,14 +69,14 @@ plt.title('Correlation of Race Finishes with Total Points')
 plt.xlabel('Correlation with Points')
 plt.show()
 
-# 6️⃣ Outliers in Race Positions
+#  Outliers in Race Positions
 plt.figure(figsize=(16, 6))
 sns.boxplot(data=df[position_cols], orient='h', palette='coolwarm')
 plt.title('Outliers in Race Positions')
 plt.xlabel('Position')
 plt.show()
 
-# 7️⃣ Distribution of Total Points
+#  Distribution of Total Points
 plt.figure(figsize=(10, 5))
 sns.histplot(df['Points'], bins=10, kde=True, color='orchid')
 plt.title('Distribution of Total Points')
@@ -84,7 +84,7 @@ plt.xlabel('Points')
 plt.ylabel('Driver Count')
 plt.show()
 
-# 8️⃣ Spot Suspicious Values (>20 in Positions)
+# Spot Suspicious Values (>20 in Positions)
 print("\nSuspicious Position Values (>20):")
 for col in position_cols:
     high_values = df[col][df[col] > 20]
